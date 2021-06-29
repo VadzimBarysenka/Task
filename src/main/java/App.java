@@ -28,9 +28,15 @@ public class App {
                 .collect(Collectors.toList());
 
 
+
+
         //4. save users (User class) in collection with correct password. Correct password - alphanumeric and more than 6 signs
-        List<User> correctpasswords = users.stream().filter(user -> user.getPassword().chars().allMatch(Character::isLetterOrDigit) && user.getPassword().length() > 6)
+        List<User> correctpasswords = users.stream().filter(user -> user.getPassword().chars().allMatch(Character::isLetterOrDigit)
+                && user.getPassword().chars().anyMatch(Character::isLetter)
+                && user.getPassword().chars().anyMatch(Character::isDigit)
+                && user.getPassword().length() > 6)
                 .collect(Collectors.toList());
+
 
 
 
@@ -63,8 +69,11 @@ public class App {
         //4. save users (User class) in collection with correct password. Correct password - alphanumeric and more than 6 signs
         List<User> correctpasswords2 = users2.stream()
                 .flatMap(Collection::stream)
-                .filter(user -> user.getPassword().chars()
-                .allMatch(Character::isLetterOrDigit) && user.getPassword().length() > 6)
+                    .filter(user -> user.getPassword().chars().allMatch(Character::isLetterOrDigit)
+                    && user.getPassword().chars().anyMatch(Character::isLetter)
+                    && user.getPassword().chars().anyMatch(Character::isDigit)
+                    && user.getPassword().length() > 6)
                 .collect(Collectors.toList());
+
     }
 }
